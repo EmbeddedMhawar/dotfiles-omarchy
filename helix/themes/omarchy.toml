@@ -1,0 +1,77 @@
+# Auto-generated theme from omarchy - everforest
+
+"ui.background" = { bg = "dark4", fg = "white" }
+"ui.cursor" = { fg = "cursor", bg = "dark4", modifiers = ["reversed"] }
+"ui.cursor.match" = { fg = "cursor", modifiers = ["reversed"] }
+"ui.cursor.primary" = { fg = "cursor", bg = "dark4", modifiers = ["reversed"] }
+"ui.linenr" = { fg = "grey" }
+"ui.linenr.selected" = { fg = "white" }
+"ui.selection" = { bg = "dark3" }
+"ui.selection.match" = { bg = "dark3" }
+"ui.statusline" = { fg = "white", bg = "dark4" }
+"ui.statusline.inactive" = { fg = "grey", bg = "dark4" }
+"ui.popup" = { bg = "dark4" }
+"ui.popup.info" = { fg = "white", bg = "dark4" }
+"ui.help" = { fg = "white", bg = "dark4" }
+"ui.highlight" = { fg = "white", bg = "dark3", modifiers = ["reversed"] }
+"ui.virtual.ruler" = { bg = "dark4" }
+"ui.virtual" = { fg = "grey" }
+"ui.virtual.selection" = { bg = "dark3" }
+"ui.menu" = { fg = "white", bg = "dark4" }
+"ui.menu.selected" = { fg = "white", bg = "dark3" }
+"ui.tooltip" = { fg = "white", bg = "dark4" }
+"ui.tooltip.selected" = { fg = "white", bg = "dark3" }
+
+"type" = { fg = "purple" }
+"type.builtin" = { fg = "purple", modifiers = ["bold"] }
+"constructor" = { fg = "purple" }
+"constant" = { fg = "peach" }
+"string" = { fg = "green" }
+"number" = { fg = "peach" }
+"comment" = { fg = "grey", modifiers = ["italic"] }
+"variable" = { fg = "white" }
+"variable.builtin" = { fg = "peach", modifiers = ["bold"] }
+"keyword" = { fg = "mauve" }
+"keyword.directive" = { fg = "mauve", modifiers = ["italic"] }
+"keyword.storage" = { fg = "red" }
+"keyword.control" = { fg = "mauve" }
+"operator" = { fg = "sky" }
+"punctuation" = { fg = "white" }
+"tag" = { fg = "mauve" }
+"attribute" = { fg = "peach" }
+"namespace" = { fg = "peach" }
+"function" = { fg = "accent" }
+"function.builtin" = { fg = "accent", modifiers = ["bold"] }
+"function.method" = { fg = "accent" }
+"macro" = { fg = "mauve" }
+"label" = { fg = "accent" }
+"module" = { fg = "peach" }
+"field" = { fg = "white" }
+"property" = { fg = "white" }
+
+"error" = { fg = "red", modifiers = ["bold"] }
+"warning" = { fg = "yellow" }
+"info" = { fg = "sky" }
+"hint" = { fg = "grey" }
+"diagnostic" = { fg = "red", modifiers = ["underlined"] }
+"diagnostic.error" = { fg = "red" }
+"diagnostic.warning" = { fg = "yellow" }
+"diagnostic.info" = { fg = "sky" }
+"diagnostic.hint" = { fg = "grey" }
+
+[palette]
+dark4 = "#2d353b"
+dark3 = "#475258"
+grey = "#475258"
+white = "#d3c6aa"
+peach = "#d3c6aa"
+orange = "#d3c6aa"
+red = "#e67e80"
+mauve = "#d699b6"
+purple = "#7fbbb3"
+accent = "#7fbbb3"
+sky = "#83c092"
+green = "#a7c080"
+yellow = "#dbbc7f"
+cursor = "#d3c6aa"
+selection = "#d3c6aa"

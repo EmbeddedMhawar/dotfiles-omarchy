@@ -1,0 +1,8 @@
+theme = "omarchy"
+
+[editor]
+line-number = "relative"
+cursorline = true
+
+[editor.file-picker]
+hidden = false

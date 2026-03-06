@@ -1,0 +1,115 @@
+#!/bin/bash
+
+THEME_NAME=$1
+THEME_DIR="$HOME/.config/omarchy/current/theme"
+HELIX_THEME_DIR="$HOME/.config/helix/themes"
+HELIX_CONFIG="$HOME/.config/helix/config.toml"
+
+mkdir -p "$HELIX_THEME_DIR"
+
+COLORS_FILE="$THEME_DIR/colors.toml"
+if [ ! -f "$COLORS_FILE" ]; then
+    echo "Error: colors.toml not found in $THEME_DIR"
+    exit 1
+fi
+
+parse_color() {
+    local key="$1"
+    grep "^${key} " "$COLORS_FILE" | head -1 | sed -E 's/.*= *"?([^"]*)"?/\1/' | tr -d ' '
+}
+
+ACCENT=$(parse_color "accent")
+CURSOR=$(parse_color "cursor")
+FOREGROUND=$(parse_color "foreground")
+BACKGROUND=$(parse_color "background")
+COLOR0=$(parse_color "color0")
+COLOR1=$(parse_color "color1")
+COLOR2=$(parse_color "color2")
+COLOR3=$(parse_color "color3")
+COLOR4=$(parse_color "color4")
+COLOR5=$(parse_color "color5")
+COLOR6=$(parse_color "color6")
+COLOR7=$(parse_color "color7")
+COLOR8=$(parse_color "color8")
+
+cat > "$HELIX_THEME_DIR/omarchy.toml" << EOF
+# Auto-generated theme from omarchy - $THEME_NAME
+
+"ui.background" = { bg = "dark4", fg = "white" }
+"ui.cursor" = { fg = "cursor", bg = "dark4", modifiers = ["reversed"] }
+"ui.cursor.match" = { fg = "cursor", modifiers = ["reversed"] }
+"ui.cursor.primary" = { fg = "cursor", bg = "dark4", modifiers = ["reversed"] }
+"ui.linenr" = { fg = "grey" }
+"ui.linenr.selected" = { fg = "white" }
+"ui.selection" = { bg = "dark3" }
+"ui.selection.match" = { bg = "dark3" }
+"ui.statusline" = { fg = "white", bg = "dark4" }
+"ui.statusline.inactive" = { fg = "grey", bg = "dark4" }
+"ui.popup" = { bg = "dark4" }
+"ui.popup.info" = { fg = "white", bg = "dark4" }
+"ui.help" = { fg = "white", bg = "dark4" }
+"ui.highlight" = { fg = "white", bg = "dark3", modifiers = ["reversed"] }
+"ui.virtual.ruler" = { bg = "dark4" }
+"ui.virtual" = { fg = "grey" }
+"ui.virtual.selection" = { bg = "dark3" }
+"ui.menu" = { fg = "white", bg = "dark4" }
+"ui.menu.selected" = { fg = "white", bg = "dark3" }
+"ui.tooltip" = { fg = "white", bg = "dark4" }
+"ui.tooltip.selected" = { fg = "white", bg = "dark3" }
+
+"type" = { fg = "purple" }
+"type.builtin" = { fg = "purple", modifiers = ["bold"] }
+"constructor" = { fg = "purple" }
+"constant" = { fg = "peach" }
+"string" = { fg = "green" }
+"number" = { fg = "peach" }
+"comment" = { fg = "grey", modifiers = ["italic"] }
+"variable" = { fg = "white" }
+"variable.builtin" = { fg = "peach", modifiers = ["bold"] }
+"keyword" = { fg = "mauve" }
+"keyword.directive" = { fg = "mauve", modifiers = ["italic"] }
+"keyword.storage" = { fg = "red" }
+"keyword.control" = { fg = "mauve" }
+"operator" = { fg = "sky" }
+"punctuation" = { fg = "white" }
+"tag" = { fg = "mauve" }
+"attribute" = { fg = "peach" }
+"namespace" = { fg = "peach" }
+"function" = { fg = "accent" }
+"function.builtin" = { fg = "accent", modifiers = ["bold"] }
+"function.method" = { fg = "accent" }
+"macro" = { fg = "mauve" }
+"label" = { fg = "accent" }
+"module" = { fg = "peach" }
+"field" = { fg = "white" }
+"property" = { fg = "white" }
+
+"error" = { fg = "red", modifiers = ["bold"] }
+"warning" = { fg = "yellow" }
+"info" = { fg = "sky" }
+"hint" = { fg = "grey" }
+"diagnostic" = { fg = "red", modifiers = ["underlined"] }
+"diagnostic.error" = { fg = "red" }
+"diagnostic.warning" = { fg = "yellow" }
+"diagnostic.info" = { fg = "sky" }
+"diagnostic.hint" = { fg = "grey" }
+
+[palette]
+dark4 = "$BACKGROUND"
+dark3 = "$COLOR0"
+grey = "$COLOR8"
+white = "$FOREGROUND"
+peach = "$CURSOR"
+orange = "$COLOR7"
+red = "$COLOR1"
+mauve = "$COLOR5"
+purple = "$COLOR4"
+accent = "$ACCENT"
+sky = "$COLOR6"
+green = "$COLOR2"
+yellow = "$COLOR3"
+cursor = "$CURSOR"
+selection = "$COLOR7"
+EOF
+
+echo "Helix theme updated for omarchy theme: $THEME_NAME"
