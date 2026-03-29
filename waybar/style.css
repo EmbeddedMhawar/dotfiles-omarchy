@@ -31,24 +31,18 @@
 }
 
 #cpu,
+#memory,
+#custom-disk,
 #battery,
 #pulseaudio,
+#network,
+#bluetooth,
+#tray,
 #custom-omarchy,
-#custom-update {
+#custom-update,
+#custom-superproductivity {
   min-width: 12px;
   margin: 0 7.5px;
-}
-
-#tray {
-  margin-right: 16px;
-}
-
-#bluetooth {
-  margin-right: 17px;
-}
-
-#network {
-  margin-right: 13px;
 }
 
 #custom-expand-icon {

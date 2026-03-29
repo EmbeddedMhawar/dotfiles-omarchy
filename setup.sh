@@ -5,6 +5,9 @@ DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "Setting up dotfiles..."
 
+# Bash
+ln -sf "$DOTFILES_DIR/bash/rc" ~/.bashrc
+
 # Hyprland
 mkdir -p ~/.config/hypr/scripts
 ln -sf "$DOTFILES_DIR/hypr/scripts/start-remote-displays.sh" ~/.config/hypr/scripts/

@@ -1,0 +1,95 @@
+# If not running interactively, don't do anything (leave this at the top of this file)
+[[ $- != *i* ]] && return
+
+# All the default Omarchy aliases and functions
+# (don't mess with these directly, just overwrite them here!)
+source ~/.local/share/omarchy/default/bash/rc
+
+# Add your own exports, aliases, and functions here.
+#
+# Make an alias for invoking commands you use constantly
+# alias p='python'
+
+# Internship Workspace
+work() {
+  local session="work"
+  local work_dir="$HOME/Work"
+  local work_gh="abderrahmane-mhawar"
+  
+  # Switch GitHub CLI to work account if not already active
+  if command -v gh &>/dev/null; then
+    gh auth switch --account "$work_gh" 2>/dev/null
+  fi
+  
+  if ! tmux has-session -t "$session" 2>/dev/null; then
+    # Window 1: Lazygit (Alt+1)
+    tmux new-session -d -s "$session" -c "$work_dir" -n "git"
+    tmux send-keys -t "$session":1 "lazygit" C-m
+    
+    # Window 2: Cursor (Left) / Terminal (Right) (Alt+2)
+    tmux new-window -t "$session":2 -n "dev" -c "$work_dir/projects"
+    tmux split-window -h -t "$session":2 -c "$work_dir/projects"
+    tmux send-keys -t "$session":2.1 "agent" C-m
+    
+    # Window 3: Gemini (Two Panes) (Alt+3)
+    tmux new-window -t "$session":3 -n "gemini" -c "$work_dir/projects"
+    tmux split-window -h -t "$session":3 -c "$work_dir/projects"
+    tmux send-keys -t "$session":3.1 "gemini" C-m
+    tmux send-keys -t "$session":3.2 "gemini" C-m
+    
+    # Window 4: Helix Editor (Alt+4)
+    tmux new-window -t "$session":4 -n "helix" -c "$work_dir/projects"
+    tmux send-keys -t "$session":4 "helix ." C-m
+    
+    # Start on the Dev window (Cursor/Terminal)
+    tmux select-window -t "$session":2
+    tmux select-pane -t "$session":2.1
+  fi
+  tmux attach-session -t "$session"
+}
+
+# Config Workspace
+config() {
+  local session="config"
+  local work_dir="$HOME"
+  
+  if ! tmux has-session -t "$session" 2>/dev/null; then
+    # Window 1: Dotfiles (Helix)
+    tmux new-session -d -s "$session" -c "$work_dir" -n "dots"
+    tmux send-keys -t "$session":1 "helix .bashrc .config/tmux/tmux.conf" C-m
+    
+    # Window 2: Gemini (Two Panes)
+    tmux new-window -t "$session":2 -n "gemini" -c "$work_dir"
+    tmux split-window -h -t "$session":2 -c "$work_dir"
+    tmux send-keys -t "$session":2.1 "gemini" C-m
+    tmux send-keys -t "$session":2.2 "gemini" C-m
+    
+    # Start on the Dots window
+    tmux select-window -t "$session":1
+  fi
+  tmux attach-session -t "$session"
+}
+
+# Hobby Workspace (audsync)
+hobby() {
+  local session="hobby"
+  local work_dir="$HOME/Hobby/audsync"
+  
+  if ! tmux has-session -t "$session" 2>/dev/null; then
+    # Window 1: Bonsai (Two Panes) (Alt+1)
+    tmux new-session -d -s "$session" -c "$work_dir" -n "bonsai"
+    tmux split-window -h -t "$session":1 -c "$work_dir"
+    tmux send-keys -t "$session":1.1 "bonsai start -- --dangerously-skip-permissions" C-m
+    tmux send-keys -t "$session":1.2 "bonsai start -- --dangerously-skip-permissions" C-m
+    
+    # Window 2: Audsync TUI (Alt+2)
+    tmux new-window -t "$session":2 -n "audsync" -c "$work_dir"
+    tmux send-keys -t "$session":2 "audsync tui transcript" C-m
+    
+    # Start on the Audsync window
+    tmux select-window -t "$session":2
+  fi
+  tmux attach-session -t "$session"
+}
+export AMUX_AGENT=agent
+source /home/mhawar/Hobby/amux-repo/amux.sh
