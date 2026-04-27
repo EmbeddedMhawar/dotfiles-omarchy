@@ -22,6 +22,8 @@ ACCENT=$(parse_color "accent")
 CURSOR=$(parse_color "cursor")
 FOREGROUND=$(parse_color "foreground")
 BACKGROUND=$(parse_color "background")
+SEL_BG=$(parse_color "selection_background")
+SEL_FG=$(parse_color "selection_foreground")
 COLOR0=$(parse_color "color0")
 COLOR1=$(parse_color "color1")
 COLOR2=$(parse_color "color2")
@@ -35,27 +37,28 @@ COLOR8=$(parse_color "color8")
 cat > "$HELIX_THEME_DIR/omarchy.toml" << EOF
 # Auto-generated theme from omarchy - $THEME_NAME
 
-"ui.background" = { bg = "dark4", fg = "white" }
-"ui.cursor" = { fg = "cursor", bg = "dark4", modifiers = ["reversed"] }
-"ui.cursor.match" = { fg = "cursor", modifiers = ["reversed"] }
-"ui.cursor.primary" = { fg = "cursor", bg = "dark4", modifiers = ["reversed"] }
+"ui.text" = { fg = "fg" }
+"ui.background" = { bg = "bg", fg = "fg" }
+"ui.cursor" = { fg = "bg", bg = "cur" }
+"ui.cursor.match" = { fg = "cur", modifiers = ["reversed"] }
+"ui.cursor.primary" = { fg = "bg", bg = "cur" }
 "ui.linenr" = { fg = "grey" }
-"ui.linenr.selected" = { fg = "white" }
-"ui.selection" = { bg = "dark3" }
-"ui.selection.match" = { bg = "dark3" }
-"ui.statusline" = { fg = "white", bg = "dark4" }
-"ui.statusline.inactive" = { fg = "grey", bg = "dark4" }
-"ui.popup" = { bg = "dark4" }
-"ui.popup.info" = { fg = "white", bg = "dark4" }
-"ui.help" = { fg = "white", bg = "dark4" }
-"ui.highlight" = { fg = "white", bg = "dark3", modifiers = ["reversed"] }
-"ui.virtual.ruler" = { bg = "dark4" }
+"ui.linenr.selected" = { fg = "cur" }
+"ui.selection" = { bg = "sel_bg", fg = "sel_fg" }
+"ui.selection.match" = { bg = "sel_bg", fg = "sel_fg" }
+"ui.statusline" = { fg = "sel_fg", bg = "sel_bg" }
+"ui.statusline.inactive" = { fg = "grey", bg = "bg" }
+"ui.popup" = { bg = "sel_bg", fg = "sel_fg" }
+"ui.popup.info" = { fg = "sel_fg", bg = "sel_bg" }
+"ui.help" = { fg = "sel_fg", bg = "sel_bg" }
+"ui.highlight" = { fg = "bg", bg = "cur" }
+"ui.virtual.ruler" = { bg = "sel_bg" }
 "ui.virtual" = { fg = "grey" }
-"ui.virtual.selection" = { bg = "dark3" }
-"ui.menu" = { fg = "white", bg = "dark4" }
-"ui.menu.selected" = { fg = "white", bg = "dark3" }
-"ui.tooltip" = { fg = "white", bg = "dark4" }
-"ui.tooltip.selected" = { fg = "white", bg = "dark3" }
+"ui.virtual.selection" = { bg = "sel_bg" }
+"ui.menu" = { fg = "sel_fg", bg = "sel_bg" }
+"ui.menu.selected" = { fg = "bg", bg = "cur" }
+"ui.tooltip" = { fg = "sel_fg", bg = "sel_bg" }
+"ui.tooltip.selected" = { fg = "bg", bg = "cur" }
 
 "type" = { fg = "purple" }
 "type.builtin" = { fg = "purple", modifiers = ["bold"] }
@@ -64,14 +67,14 @@ cat > "$HELIX_THEME_DIR/omarchy.toml" << EOF
 "string" = { fg = "green" }
 "number" = { fg = "peach" }
 "comment" = { fg = "grey", modifiers = ["italic"] }
-"variable" = { fg = "white" }
+"variable" = { fg = "fg" }
 "variable.builtin" = { fg = "peach", modifiers = ["bold"] }
 "keyword" = { fg = "mauve" }
 "keyword.directive" = { fg = "mauve", modifiers = ["italic"] }
 "keyword.storage" = { fg = "red" }
 "keyword.control" = { fg = "mauve" }
 "operator" = { fg = "sky" }
-"punctuation" = { fg = "white" }
+"punctuation" = { fg = "fg" }
 "tag" = { fg = "mauve" }
 "attribute" = { fg = "peach" }
 "namespace" = { fg = "peach" }
@@ -81,8 +84,8 @@ cat > "$HELIX_THEME_DIR/omarchy.toml" << EOF
 "macro" = { fg = "mauve" }
 "label" = { fg = "accent" }
 "module" = { fg = "peach" }
-"field" = { fg = "white" }
-"property" = { fg = "white" }
+"field" = { fg = "fg" }
+"property" = { fg = "fg" }
 
 "error" = { fg = "red", modifiers = ["bold"] }
 "warning" = { fg = "yellow" }
@@ -95,21 +98,21 @@ cat > "$HELIX_THEME_DIR/omarchy.toml" << EOF
 "diagnostic.hint" = { fg = "grey" }
 
 [palette]
-dark4 = "\$BACKGROUND"
-dark3 = "\$COLOR0"
-grey = "\$COLOR8"
-white = "\$FOREGROUND"
-peach = "\$CURSOR"
-orange = "\$COLOR7"
-red = "\$COLOR1"
-mauve = "\$COLOR5"
-purple = "\$COLOR4"
-accent = "\$ACCENT"
-sky = "\$COLOR6"
-green = "\$COLOR2"
-yellow = "\$COLOR3"
-cursor = "\$CURSOR"
-selection = "\$COLOR7"
+bg = "$BACKGROUND"
+fg = "$FOREGROUND"
+cur = "$CURSOR"
+sel_bg = "$SEL_BG"
+sel_fg = "$SEL_FG"
+grey = "$COLOR8"
+peach = "$COLOR7"
+orange = "$COLOR7"
+red = "$COLOR1"
+mauve = "$COLOR5"
+purple = "$COLOR4"
+accent = "$ACCENT"
+sky = "$COLOR6"
+green = "$COLOR2"
+yellow = "$COLOR3"
 EOF
 
 echo "Helix theme updated for omarchy theme: $THEME_NAME"
