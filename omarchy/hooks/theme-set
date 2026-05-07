@@ -50,6 +50,7 @@ cat > "$HELIX_THEME_DIR/omarchy.toml" << EOF
 "ui.statusline.inactive" = { fg = "grey", bg = "bg" }
 "ui.popup" = { bg = "sel_bg", fg = "sel_fg" }
 "ui.popup.info" = { fg = "sel_fg", bg = "sel_bg" }
+"ui.text.info" = { fg = "sel_fg", bg = "sel_bg" }
 "ui.help" = { fg = "sel_fg", bg = "sel_bg" }
 "ui.highlight" = { fg = "bg", bg = "cur" }
 "ui.virtual.ruler" = { bg = "sel_bg" }
