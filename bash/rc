@@ -92,4 +92,7 @@ hobby() {
   tmux attach-session -t "$session"
 }
 export AMUX_AGENT=agent
-source /home/mhawar/Hobby/amux-repo/amux.sh
+source /home/mhawar/.amux/amux.sh
+
+# GitHub Ace
+export PATH="$HOME/.ace/bin:$PATH"
